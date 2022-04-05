@@ -61,16 +61,27 @@ guessRows.forEach((guessRow, guessRowIndex) => {
 
 const handleClick = (letter) => {
     console.log('clicked', letter)
+    if (letter === '«') {
+        console.log('delete letter')
+        return 
+    }
+    if (letter === 'ENTER') {
+        console.log('check row')
+        return
+    }
     addLetter(letter)
 }
 
 const addLetter = (letter) => {
-    const tile = document.getElementById('guessRow-' + currentRow + '-tile-' + currentTile)
-    tile.textContent = letter                               // Update UI
-    guessRows[currentRow][currentTile] = letter             // Update guessRows variable for checking
-    tile.setAttribute('data', letter)
-    currentTile++
-    console.log('guessRows', guessRows)
+    if (currentTile < 5 && currentRow < 6) {
+        const tile = document.getElementById('guessRow-' + currentRow + '-tile-' + currentTile)
+        tile.textContent = letter                               // Update UI
+        guessRows[currentRow][currentTile] = letter             // Update guessRows variable for checking
+        tile.setAttribute('data', letter)
+        currentTile++
+        console.log('guessRows', guessRows)
+    }
+    
 }
 
 // Create Keyboard keys
