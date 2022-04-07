@@ -46,6 +46,7 @@ const guessRows = [
 
 let currentRow = 0
 let currentTile = 0
+let isGame = false
 
 // Create grid
 guessRows.forEach((guessRow, guessRowIndex) => {
@@ -97,12 +98,26 @@ const deleteLetter = (letter) => {
 }
 
 const checkRow = () => {
-    if (currentTile === 5) {
-        const guess = guessRows[currentRow].join('')
+    const guess = guessRows[currentRow].join('')
+
+    if (currentTile > 4) {
+        
         console.log("guess is " + guess, wordle)
 
         if (wordle == guess) {
             showMessage("Match")
+            isGame = true
+            return
+        } else {
+            if (currentRow >= 5) {
+                isGame = true
+                showMessage("Game Over")
+                return
+            }
+            if (currentRow < 5) {
+                currentRow++
+                currentTile = 0
+            }
         }
     }
 }
