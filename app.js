@@ -101,9 +101,9 @@ const checkRow = () => {
     const guess = guessRows[currentRow].join('')
 
     if (currentTile > 4) {
-        
         console.log("guess is " + guess, wordle)
-
+        flipTile()
+        
         if (wordle == guess) {
             showMessage("Match")
             isGame = true
@@ -129,6 +129,23 @@ const showMessage = (message) => {
 
     // Remove message after 2 seconds
     setTimeout(() => messageDisplay.removeChild(messageElement), 2000)
+}
+
+// Add colors
+const flipTile = () => {
+    // .childNodes get all the children of parent
+    const rowTiles = document.querySelector('#guessRow-' + currentRow).childNodes
+    rowTiles.forEach((tile, index) => {
+        const dataLetter = tile.getAttribute('data')
+
+        if (dataLetter == wordle[index]) {
+            tile.classList.add('green-overlay')
+        } else if (wordle.includes(dataLetter)) {
+            tile.classList.add('yellow-overlay')
+        } else {
+            tile.classList.add('grey-overlay')
+        }
+    })
 }
 
 // Create Keyboard keys
