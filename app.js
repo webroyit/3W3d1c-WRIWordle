@@ -131,6 +131,11 @@ const showMessage = (message) => {
     setTimeout(() => messageDisplay.removeChild(messageElement), 2000)
 }
 
+const addColorToKey = (keyLetter, color) => {
+    const key = document.getElementById(keyLetter)
+    key.classList.add(color)
+}
+
 // Add colors
 const flipTile = () => {
     // .childNodes get all the children of parent
@@ -140,13 +145,16 @@ const flipTile = () => {
 
         setTimeout(() => {
             tile.classList.add('flip')
-            
+
             if (dataLetter == wordle[index]) {
                 tile.classList.add('green-overlay')
+                addColorToKey(dataLetter, 'green-overlay')
             } else if (wordle.includes(dataLetter)) {
                 tile.classList.add('yellow-overlay')
+                addColorToKey(dataLetter, 'yellow-overlay')
             } else {
                 tile.classList.add('grey-overlay')
+                addColorToKey(dataLetter, 'grey-overlay')
             }
         }, 500 * index)     // Increment each one by index so that they do not flip at the same time
     })
